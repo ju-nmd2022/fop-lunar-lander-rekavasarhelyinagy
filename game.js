@@ -21,7 +21,7 @@ function mouseClicked() {
 //END SCREEN
 function endScreen() {
   background(255, 0, 0);
-  text("Game Over", 200, 100); 
+  text("Game Over", 200, 100);
 }
 
 //SCENERY//
@@ -85,23 +85,96 @@ function ship(shipX, shipY) {
   quadraticVertex(84, 30, 65, 38);
   vertex(65, 23);
   endShape(CLOSE);
+
   pop();
   //https://programmingdesignsystems.com/shape/custom-shapes/index.html#custom-shapes-pANLh0l
 }
 
-//SHARK1
-function shark1(shark1X, shark1Y) {
+//CORALL
+function corall(corallX, corallY) {
   push();
-  fill(0, 0, 255);
-  ellipse(shark1X, shark1Y, 150, 50);
+  translate(corallX, corallY);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 200, 20, 20, 0, 0);
+  pop();
+}
+
+//JELLYFISH
+function jellyfish(jellyfishX, jellyfishY) {
+  push();
+  translate(jellyfishX, jellyfishY);
+  fill(255, 100, 100);
+  ellipse(0, 0, 10, 300);
   pop();
 }
 
 //SHARK2
-function shark2(shark2X, s2y) {
+function shark2(shark2X, shark2Y) {
   push();
-  fill(0, 0, 255);
-  ellipse(shark2X, s2y, 150, 50);
+  noStroke();
+
+  //main body
+  fill(102, 102, 102);
+  ellipse(shark2X, shark2Y, 150, 40);
+
+  //eyes
+  fill(0, 0, 0);
+  ellipse(shark2X + 40, shark2Y - 5, 5);
+
+  //tail
+  fill(102, 102, 102);
+  beginShape();
+  vertex(shark2X - 115, shark2Y - 40);
+  vertex(shark2X - 68, shark2Y);
+  vertex(shark2X - 87, shark2Y + 20);
+  endShape();
+
+  //top fin
+  fill(102, 102, 102);
+  beginShape();
+  vertex(shark2X - 28, shark2Y - 16);
+  vertex(shark2X - 30, shark2Y - 44);
+  vertex(shark2X, shark2Y - 20);
+  endShape();
+
+  //front fin
+  fill(102, 102, 102);
+  beginShape();
+  vertex(shark2X + 11, shark2Y + 18);
+  vertex(shark2X - 15, shark2Y + 48);
+  vertex(shark2X - 10, shark2Y + 20);
+  endShape();
+
+  //bottom fin
+  fill(102, 102, 102);
+  beginShape();
+  vertex(shark2X - 40, shark2Y + 15);
+  vertex(shark2X - 59, shark2Y + 22);
+  vertex(shark2X - 58, shark2Y + 12);
+  endShape();
+
+  //teeth
+  fill(255, 255, 255);
+  beginShape();
+  vertex(shark2X + 48, shark2Y + 11);
+  vertex(shark2X + 56, shark2Y + 13);
+  vertex(shark2X + 50, shark2Y + 18);
+  endShape();
+
+  fill(255, 255, 255);
+  beginShape();
+  vertex(shark2X + 42, shark2Y + 9);
+  vertex(shark2X + 42, shark2Y + 15);
+  vertex(shark2X + 48, shark2Y + 11);
+  endShape();
+
+  fill(255, 255, 255);
+  beginShape();
+  vertex(shark2X + 37, shark2Y + 5);
+  vertex(shark2X + 42, shark2Y + 9);
+  vertex(shark2X + 36, shark2Y + 10);
+  endShape();
+
   pop();
 }
 
@@ -109,15 +182,32 @@ function shark2(shark2X, s2y) {
 
 //shark1
 let shark1X = 600;
+let shark1Y = 200;
 let speed1 = 3.5;
 //shark2
 let shark2X = 400;
+let shark2Y = 400;
 let speed2 = 5;
+//shark3
+let shark3X = 50;
+let shark3Y = 550;
+let speed3 = 6;
+//shark
+let shark4X = 50;
+let shark4Y = 550;
+let speed4 = 6;
 //ship
 let shipY = 0;
 let shipX = 0;
 let velocity = 1;
 let acceleration = 0.1;
+//corall
+let corall1X = 200;
+let corall1Y = 450;
+//jellyfish
+let jellyfish1X = 300;
+let jellyfish1Y = 150;
+
 //stop ship on the ground
 let isGameActive = true;
 //game stage
@@ -129,9 +219,12 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     scenery();
+    corall(corall1X, corall1Y);
+    jellyfish(jellyfish1X, jellyfish1Y);
+    shark2(shark1X, shark1Y);
+    shark2(shark2X, shark2Y);
+    shark2(shark3X, shark3Y);
     ship(shipX, shipY);
-    shark1(shark1X, 200);
-    shark2(shark2X, 400);
   } else if (state === "end") {
     endScreen();
   }
@@ -154,18 +247,28 @@ function draw() {
   } else if (keyIsDown(39)) {
     shipX = shipX + 2;
   }
-  if (keyIsDown(32)) { 
+  if (keyIsDown(32)) {
     velocity = velocity - 0.5;
   }
 
-  //sharks turning
+  //sharks moving
   shark1X = shark1X + speed1;
-  if (shark1X > 1150 || shark1X < 50) {
-    speed1 = speed1 * -1;
+  if (shark1X > 1350) {
+    shark1X = -100;
   }
 
   shark2X = shark2X + speed2;
-  if (shark2X > 1150 || shark2X < 50) {
-    speed2 = speed2 * -1;
+  if (shark2X > 1350) {
+    shark2X = -100;
+  }
+
+  shark3X = shark3X + speed3;
+  if (shark3X > 1350) {
+    shark3X = -100;
+  }
+
+  shark4X = shark4X + speed4;
+  if (shark4X > 1350) {
+    shark4X = -100;
   }
 }
