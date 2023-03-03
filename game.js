@@ -11,17 +11,19 @@ function startScreen() {
 function mouseClicked() {
   if (state === "start") {
     state = "game";
-  } else if (state === "game") {
-    state = "end";
-  } else if (state === "end") {
-    state = "start";
   }
 }
 
-//END SCREEN
-function endScreen() {
+//LOSE SCREEN
+function loseScreen() {
   background(255, 0, 0);
-  text("Game Over", 200, 100);
+  text("You Lost!", 200, 100);
+}
+
+//WIN SCREEN
+function winScreen() {
+  background(0, 255, 0);
+  text("You Won!", 200, 100);
 }
 
 //SCENERY//
@@ -39,9 +41,10 @@ function scenery() {
 
   pop();
 
+  //land area
   push();
   fill(255, 255, 255);
-  ellipse(1100, 650, 100, 50);
+  quad(1050, 650, 1150, 650, 1175, 680, 1025, 680);
   pop();
 }
 
@@ -108,71 +111,71 @@ function jellyfish(jellyfishX, jellyfishY) {
   pop();
 }
 
-//SHARK2
-function shark2(shark2X, shark2Y) {
+//SHARK
+function shark(sharkX, sharkY) {
   push();
   noStroke();
 
   //main body
   fill(102, 102, 102);
-  ellipse(shark2X, shark2Y, 150, 40);
+  ellipse(sharkX, sharkY, 150, 40);
 
   //eyes
   fill(0, 0, 0);
-  ellipse(shark2X + 40, shark2Y - 5, 5);
+  ellipse(sharkX + 40, sharkY - 5, 5);
 
   //tail
   fill(102, 102, 102);
   beginShape();
-  vertex(shark2X - 115, shark2Y - 40);
-  vertex(shark2X - 68, shark2Y);
-  vertex(shark2X - 87, shark2Y + 20);
+  vertex(sharkX - 115, sharkY - 40);
+  vertex(sharkX - 68, sharkY);
+  vertex(sharkX - 87, sharkY + 20);
   endShape();
 
   //top fin
   fill(102, 102, 102);
   beginShape();
-  vertex(shark2X - 28, shark2Y - 16);
-  vertex(shark2X - 30, shark2Y - 44);
-  vertex(shark2X, shark2Y - 20);
+  vertex(sharkX - 28, sharkY - 16);
+  vertex(sharkX - 30, sharkY - 44);
+  vertex(sharkX, sharkY - 20);
   endShape();
 
   //front fin
   fill(102, 102, 102);
   beginShape();
-  vertex(shark2X + 11, shark2Y + 18);
-  vertex(shark2X - 15, shark2Y + 48);
-  vertex(shark2X - 10, shark2Y + 20);
+  vertex(sharkX + 11, sharkY + 18);
+  vertex(sharkX - 15, sharkY + 48);
+  vertex(sharkX - 10, sharkY + 20);
   endShape();
 
   //bottom fin
   fill(102, 102, 102);
   beginShape();
-  vertex(shark2X - 40, shark2Y + 15);
-  vertex(shark2X - 59, shark2Y + 22);
-  vertex(shark2X - 58, shark2Y + 12);
+  vertex(sharkX - 40, sharkY + 15);
+  vertex(sharkX - 59, sharkY + 22);
+  vertex(sharkX - 58, sharkY + 12);
   endShape();
 
   //teeth
   fill(255, 255, 255);
   beginShape();
-  vertex(shark2X + 48, shark2Y + 11);
-  vertex(shark2X + 56, shark2Y + 13);
-  vertex(shark2X + 50, shark2Y + 18);
+  vertex(sharkX + 48, sharkY + 11);
+  vertex(sharkX + 56, sharkY + 13);
+  vertex(sharkX + 50, sharkY + 18);
   endShape();
 
   fill(255, 255, 255);
   beginShape();
-  vertex(shark2X + 42, shark2Y + 9);
-  vertex(shark2X + 42, shark2Y + 15);
-  vertex(shark2X + 48, shark2Y + 11);
+  vertex(sharkX + 42, sharkY + 9);
+  vertex(sharkX + 42, sharkY + 15);
+  vertex(sharkX + 48, sharkY + 11);
   endShape();
 
   fill(255, 255, 255);
   beginShape();
-  vertex(shark2X + 37, shark2Y + 5);
-  vertex(shark2X + 42, shark2Y + 9);
-  vertex(shark2X + 36, shark2Y + 10);
+  vertex(sharkX + 37, sharkY + 5);
+  vertex(sharkX + 42, sharkY + 9);
+  vertex(sharkX + 36, sharkY + 10);
   endShape();
 
   pop();
@@ -219,26 +222,41 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     scenery();
-    corall(corall1X, corall1Y);
     jellyfish(jellyfish1X, jellyfish1Y);
-    shark2(shark1X, shark1Y);
-    shark2(shark2X, shark2Y);
-    shark2(shark3X, shark3Y);
+    shark(shark1X, shark1Y);
+    shark(shark2X, shark2Y);
+    shark(shark3X, shark3Y);
     ship(shipX, shipY);
-  } else if (state === "end") {
-    endScreen();
-  }
 
-  //ship gravity
-  if (isGameActive) {
-    shipY = shipY + velocity;
-    velocity = velocity + acceleration;
+    //ship gravity
+    if (isGameActive) {
+      shipY = shipY + velocity;
+      velocity = velocity + acceleration;
 
-    //stop ship on the ground
-    if (shipY > 650) {
-      isGameActive = false;
+      //stop ship on the ground
     }
-    console.log(shipY);
+    if (shipY > 640 && shipX < 1050) {
+      isGameActive = false;
+      loseScreen();
+    }
+
+    //collision with corall1
+    if (
+      dist(shipX + 75, shipY + 30, 205, 460) < 20 ||
+      dist(shipX + 50, shipY + 30, 205, 460) < 20 ||
+      dist(shipX + 25, shipY + 30, 205, 460) < 20
+    ) {
+      isGameActive = false;
+      loseScreen();
+    } else {
+      corall(corall1X, corall1Y);
+    }
+
+    //collision with shark1
+    if (
+      dist(shipX + 75, shipY +30, )
+    )
+
   }
 
   //move the ship with the buttons
@@ -272,3 +290,7 @@ function draw() {
     shark4X = -100;
   }
 }
+
+
+
+//note for object collision detection(not used in the game): http://wiki.iad.zhdk.ch/PB/2554331795/p5.js+Simple+Collision+Detection
