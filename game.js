@@ -95,10 +95,89 @@ function ship(shipX, shipY) {
 
 //CORALL
 function corall(corallX, corallY) {
+  
+
+  push();
+  noStroke();
+  scale(1.2);
+
   push();
   translate(corallX, corallY);
+  rotate(0.15);
   fill(48, 109, 75);
-  rect(0, 0, 10, 200, 20, 20, 0, 0);
+  rect(0, 0, 10, 50, 20, 20, 0, 0);
+  pop();
+
+  push();
+  translate(corallX - 11, corallY - 29);
+  rotate(-0.3);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 40, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX - 3, corallY - 74);
+  rotate(0.15);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 50, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX + 17, corallY - 29);
+  rotate(0.5);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 40, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX - 30, corallY - 49);
+  rotate(-0.7);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 35, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX - 23, corallY - 89);
+  rotate(-0.7);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 35, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX + 4, corallY - 110);
+  rotate(0.45);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 35, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX + 45, corallY - 45);
+  rotate(01);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 35, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX + 20, corallY - 50);
+  rotate(-0.1);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX - 10, corallY - 120);
+  rotate(-0.5);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(corallX + 15, corallY - 125);
+  rotate(0.7);
+  fill(48, 109, 75);
+  rect(0, 0, 10, 25, 20, 20, 20, 20);
+  pop();
+
   pop();
 }
 
@@ -205,8 +284,8 @@ let shipX = 0;
 let velocity = 1;
 let acceleration = 0.1;
 //corall
-let corall1X = 200;
-let corall1Y = 450;
+let corall1X = 150;
+let corall1Y = 500;
 //jellyfish
 let jellyfish1X = 300;
 let jellyfish1Y = 150;
@@ -223,7 +302,6 @@ function draw() {
   } else if (state === "game") {
     scenery();
     jellyfish(jellyfish1X, jellyfish1Y);
-    shark(shark1X, shark1Y);
     shark(shark2X, shark2Y);
     shark(shark3X, shark3Y);
     ship(shipX, shipY);
@@ -233,18 +311,21 @@ function draw() {
       shipY = shipY + velocity;
       velocity = velocity + acceleration;
 
-      //stop ship on the ground
+      //stop ship on the ground, except the landing area
     }
-    if (shipY > 640 && shipX < 1050) {
+    if (shipY > 640 && shipX < 1030) {
       isGameActive = false;
       loseScreen();
+    } else if (shipY > 640 && shipX > 1030 && velocity > 0.0000000005) {
+      isGameActive = false;
+      winScreen();
     }
 
     //collision with corall1
     if (
-      dist(shipX + 75, shipY + 30, 205, 460) < 20 ||
-      dist(shipX + 50, shipY + 30, 205, 460) < 20 ||
-      dist(shipX + 25, shipY + 30, 205, 460) < 20
+      dist(shipX + 75, shipY + 30, 205, 460) < 20 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, 205, 460) < 20 || //with the bottom of the ship
+      dist(shipX + 25, shipY + 30, 205, 460) < 20 //with the end of the ship
     ) {
       isGameActive = false;
       loseScreen();
@@ -254,9 +335,57 @@ function draw() {
 
     //collision with shark1
     if (
-      dist(shipX + 75, shipY +30, )
-    )
+      dist(shipX + 75, shipY + 30, shark1X, shark1Y) < 30 || //with the front of the ship
+      dist(shipX + 75, shipY + 30, shark1X + 55, shark1Y) < 30 || //with the front of the ship
+      dist(shipX + 75, shipY + 30, shark1X - 55, shark1Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark1X, shark1Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark1X + 55, shark1Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark1X - 55, shark1Y) < 30 || //with the front of the ship
+      dist(shipX + 25, shipY + 30, shark1X, shark1Y) < 30 || //with the end of the ship
+      dist(shipX + 25, shipY + 30, shark1X + 55, shark1Y) < 30 || //with the end of the ship
+      dist(shipX + 25, shipY + 30, shark1X - 55, shark1Y) < 30 //with the end of the ship
+    ) {
+      isGameActive = false;
+      loseScreen();
+    } else {
+      shark(shark1X, shark1Y);
+    }
 
+    //collision with shark2
+    if (
+      dist(shipX + 75, shipY + 30, shark2X, shark2Y) < 30 || //with the front of the ship
+      dist(shipX + 75, shipY + 30, shark2X + 55, shark2Y) < 30 || //with the front of the ship
+      dist(shipX + 75, shipY + 30, shark2X - 55, shark2Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark2X, shark2Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark2X + 55, shark2Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark2X - 55, shark2Y) < 30 || //with the front of the ship
+      dist(shipX + 25, shipY + 30, shark2X, shark2Y) < 30 || //with the end of the ship
+      dist(shipX + 25, shipY + 30, shark2X + 55, shark2Y) < 30 || //with the end of the ship
+      dist(shipX + 25, shipY + 30, shark2X - 55, shark2Y) < 30 //with the end of the ship
+    ) {
+      isGameActive = false;
+      loseScreen();
+    } else {
+      shark(shark2X, shark2Y);
+    }
+
+    //collision with shark3
+    if (
+      dist(shipX + 75, shipY + 30, shark3X, shark3Y) < 30 || //with the front of the ship
+      dist(shipX + 75, shipY + 30, shark3X + 55, shark3Y) < 30 || //with the front of the ship
+      dist(shipX + 75, shipY + 30, shark3X - 55, shark3Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark3X, shark3Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark3X + 55, shark3Y) < 30 || //with the front of the ship
+      dist(shipX + 50, shipY + 30, shark3X - 55, shark3Y) < 30 || //with the front of the ship
+      dist(shipX + 25, shipY + 30, shark3X, shark3Y) < 30 || //with the end of the ship
+      dist(shipX + 25, shipY + 30, shark3X + 55, shark3Y) < 30 || //with the end of the ship
+      dist(shipX + 25, shipY + 30, shark3X - 55, shark3Y) < 30 //with the end of the ship
+    ) {
+      isGameActive = false;
+      loseScreen();
+    } else {
+      shark(shark3X, shark3Y);
+    }
   }
 
   //move the ship with the buttons
@@ -291,6 +420,4 @@ function draw() {
   }
 }
 
-
-
-//note for object collision detection(not used in the game): http://wiki.iad.zhdk.ch/PB/2554331795/p5.js+Simple+Collision+Detection
+//sidenote: object collision detection(not used in the game): http://wiki.iad.zhdk.ch/PB/2554331795/p5.js+Simple+Collision+Detection
