@@ -96,9 +96,9 @@ function ship(shipX, shipY) {
 //CORALL
 function corall(corallX, corallY) {
   
-
   push();
   noStroke();
+
   scale(1.2);
 
   push();
@@ -123,8 +123,8 @@ function corall(corallX, corallY) {
   pop();
 
   push();
-  translate(corallX + 17, corallY - 29);
-  rotate(0.5);
+  translate(corallX + 13, corallY - 29);
+  rotate(0.3);
   fill(48, 109, 75);
   rect(0, 0, 10, 40, 20, 20, 20, 20);
   pop();
@@ -151,15 +151,15 @@ function corall(corallX, corallY) {
   pop();
 
   push();
-  translate(corallX + 45, corallY - 45);
-  rotate(01);
+  translate(corallX + 30, corallY - 57);
+  rotate(0.57);
   fill(48, 109, 75);
   rect(0, 0, 10, 35, 20, 20, 20, 20);
   pop();
 
   push();
-  translate(corallX + 20, corallY - 50);
-  rotate(-0.1);
+  translate(corallX + 8, corallY - 46);
+  rotate(-0.2);
   fill(48, 109, 75);
   rect(0, 0, 10, 25, 20, 20, 20, 20);
   pop();
@@ -181,12 +181,224 @@ function corall(corallX, corallY) {
   pop();
 }
 
-//JELLYFISH
+///JELLYFISH
 function jellyfish(jellyfishX, jellyfishY) {
   push();
+
   translate(jellyfishX, jellyfishY);
-  fill(255, 100, 100);
-  ellipse(0, 0, 10, 300);
+  scale();
+
+  noStroke();
+
+  //leg 1
+  push();
+  translate(179, 210);
+  rotate(0.5);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(165, 235);
+  rotate(-0.4);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(175, 253);
+  rotate(0.2);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(168, 280);
+  rotate(-0.4);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(178, 298);
+  rotate(0.1);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(175, 325);
+  rotate(-0.5);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 20, 20, 20, 20, 20);
+  pop();
+
+  //leg2
+  push();
+  translate(196, 215);
+  rotate(0.2);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(190, 240);
+  rotate(-0.3);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(198, 260);
+  rotate(0.2);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(193, 280);
+  rotate(-0.3);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 35, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(203, 305);
+  rotate(0.2);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(198, 325);
+  rotate(-0.3);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(207, 345);
+  rotate(0.35);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(198, 366);
+  rotate(-0.3);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(207, 385);
+  rotate(0.3);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 20, 20, 20, 20, 20);
+  pop();
+
+  //leg3
+  push();
+  translate(208, 220);
+  rotate(-0.35);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 40, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(221, 250);
+  rotate(0.3);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 30, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(212, 275);
+  rotate(-0.4);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(222, 290);
+  rotate(0.25);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(215, 310);
+  rotate(-0.25);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(221, 328);
+  rotate(0.1);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 28, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(218, 352);
+  rotate(-0.4);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 25, 20, 20, 20, 20);
+  pop();
+
+  push();
+  translate(227, 368);
+  rotate(0.1);
+  fill(223, 162, 255);
+  rect(0, 0, 8, 20, 20, 20, 20, 20);
+  pop();
+
+  //head
+  push();
+  translate(200, 195); //STARTING POINT OF THE JELLYFISH
+  rotate(0.2);
+  fill(205, 134, 255);
+  ellipse(0, 0, 90, 60);
+  pop();
+
+  //circles on the head
+  push();
+  translate(195, 182);
+  rotate(0.2);
+  stroke(133, 14, 255);
+  strokeWeight(3);
+  fill(223, 134, 255);
+  ellipse(0, 0, 15, 8);
+  pop();
+
+  push();
+  translate(218, 190);
+  rotate(0.2);
+  stroke(133, 14, 255);
+  strokeWeight(3);
+  fill(223, 134, 255);
+  ellipse(0, 0, 15, 8);
+  pop();
+
+  push();
+  translate(203, 200);
+  rotate(0.2);
+  stroke(133, 14, 255);
+  strokeWeight(3);
+  fill(223, 134, 255);
+  ellipse(0, 0, 15, 8);
+  pop();
+
+  push();
+  translate(180, 192);
+  rotate(0.2);
+  stroke(133, 14, 255);
+  strokeWeight(3);
+  fill(223, 134, 255);
+  ellipse(0, 0, 15, 8);
+  pop();
+
   pop();
 }
 
@@ -283,13 +495,15 @@ let shipY = 0;
 let shipX = 0;
 let velocity = 1;
 let acceleration = 0.1;
-//corall
+//corall1
 let corall1X = 150;
 let corall1Y = 500;
+//corall2
+let corall2X = 800;
+let corall2Y = 500;
 //jellyfish
-let jellyfish1X = 300;
-let jellyfish1Y = 150;
-
+let jellyfish1X = 0;
+let jellyfish1Y = 0;
 //stop ship on the ground
 let isGameActive = true;
 //game stage
@@ -301,18 +515,15 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     scenery();
-    jellyfish(jellyfish1X, jellyfish1Y);
-    shark(shark2X, shark2Y);
-    shark(shark3X, shark3Y);
     ship(shipX, shipY);
+    corall(corall2X, corall2Y);
 
     //ship gravity
-    if (isGameActive) {
-      shipY = shipY + velocity;
-      velocity = velocity + acceleration;
+    shipY = shipY + velocity;
+    velocity = velocity + acceleration;
 
-      //stop ship on the ground, except the landing area
-    }
+    //stop ship on the ground, except the landing area
+
     if (shipY > 640 && shipX < 1030) {
       isGameActive = false;
       loseScreen();
